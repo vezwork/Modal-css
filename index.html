@@ -26,12 +26,12 @@
         
         //todo: is bind bad style?
         //preserve display value rather than always changing it to block on show/toggle
-        //queued animations
         function Modal(el) {
         //el is either a dom node to modal-ify, or a className string.
             
             this.shown = false;
-            //this.display = "block";
+            this.animating = 0; //0 not animating, 1 animating in, 2 animating out
+            this.queued = false; //for animation queueing, true if an animation is queued
         
             //initialize dom
             if (typeof el === "object") {
@@ -45,10 +45,26 @@
             }
         
             this.show = function(content) {
-                this.shown = true;
                 if (content) this.dom.innerHTML = content;
                 this.dom.style.display = "block";
-                if (this.inAnim) this.dom.style.animationName = this.inAnim;
+                
+                if (this.inAnim) { //if animations are used
+                    if (this.animating==0) { //not animating currently
+                        if (!this.shown) {
+                            this.dom.style.animationName = this.inAnim;
+                            this.animating = 1;
+                            this.shown = true;
+                        } else {
+                            this.queued = false;
+                        }
+                    } else {
+                        this.queued = (this.animating==1)?false:true;
+                    }
+                } else {
+                    this.shown = true;
+                }
+                
+                return this;
             }.bind(this);
             
             this.toggle = function() {
@@ -57,26 +73,44 @@
                 } else {
                     this.show();
                 }
+                
+                return this;
             }.bind(this);
             
             this.hide = function() {
-                this.shown = false;
-                if (this.outAnim) {
-                    this.dom.style.animationName = this.outAnim;
+                if (this.outAnim) { //if animations are used
+                    if (this.animating==0) { //not animating currently
+                        if (this.shown) {
+                            this.dom.style.animationName = this.outAnim;
+                            this.animating = 2;
+                            this.shown = false;
+                        } else {
+                            this.queued = false;
+                        }
+                    } else {
+                        this.queued = (this.animating==2)?false:true;
+                    }
                 } else {
                     this.dom.style.display = "none";
+                    this.shown = false;
                 }
+                
+                return this;
             }.bind(this);
             
             this.set = function(content) {
                 this.dom.innerHTML = content;
+                
+                return this;
             }.bind(this);
             
-            //animation stuff
+            //animation initialization
             this.setAnim = function(inAnim, outAnim) {
+            
                 if (!this.inAnim) this.dom.addEventListener("animationend", function() {
                     this.dom.style.animationName = "";
-                    console.log("anim end!");
+                    this.animating = 0;
+                    console.log("anim end!", this.shown);
                     
                     if (!this.shown) {
                         this.dom.style.display = "none";
@@ -85,6 +119,11 @@
                         }
                     } else if (this.inAnim === this.outAnim) {
                         this.dom.style.animationDirection = "reverse";
+                    }
+                    
+                    if (this.queued) {
+                        this.queued = false;
+                        this.toggle();
                     }
                 }.bind(this));
             
@@ -96,6 +135,8 @@
                     this.inAnim = inAnim;
                     this.outAnim = inAnim;
                 }
+                
+                return this;
             }
             
         }
@@ -103,9 +144,7 @@
         var myModal;
         
         window.onload = function() {
-            myModal = new Modal();
-            myModal.setAnim("example");
-            myModal.show("dogs all go to heaven");
+            myModal = new Modal().setAnim("example", "example2").show("dogs all go to heaven");
             myModal.dom.onclick = myModal.hide;
         }
     </script>
@@ -123,12 +162,16 @@
             padding: 20px;
             
             animation-duration: 1s;
-            animation-direction: alternate;
         }
         
         @keyframes example {
             from {opacity: 0; top: 20%;}
             to {opacity: 1;}
+        }
+        
+        @keyframes example2 {
+            from {opacity: 1;}
+            to {opacity: 0; top: 80%;}
         }
     </style>
  </head>
@@ -136,6 +179,12 @@
 <body>
     <button onclick="myModal.toggle();">
         toggle
+    </button>
+    <button onclick="myModal.show();">
+        show
+    </button>
+    <button onclick="myModal.hide();">
+        hide
     </button>
     <button onclick="myModal.set('yiiiii');">
         yes
