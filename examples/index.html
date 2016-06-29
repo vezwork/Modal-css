@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Modal js showcase</title>    
+    <script src="assets/modal.min.js"></script>
+    
+    <script>      
+        var myModal;
+        
+        window.onload = function() {
+            myModal = new Modal("modal").setAnim("example", "example2").show("dogs all go to heaven");
+            myModal.dom.onclick = myModal.hide;
+        }
+    </script>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            
+            background: white;
+            box-shadow: 0px 3px 6px gray;
+            
+            padding: 20px;
+            
+            animation-duration: 1s;
+        }
+        
+        @keyframes example {
+            from {opacity: 0; top: 20%;}
+            to {opacity: 1;}
+        }
+        
+        @keyframes example2 {
+            from {opacity: 1;}
+            to {opacity: 0; top: 80%;}
+        }
+    </style>
+ </head>
+
+<body>
+    <button onclick="myModal.toggle();">
+        toggle
+    </button>
+    <button onclick="myModal.show();">
+        show
+    </button>
+    <button onclick="myModal.hide();">
+        hide
+    </button>
+    <button onclick="myModal.set('yiiiii');">
+        yes
+    </button>
+</body>
+</html>
