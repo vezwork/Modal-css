@@ -26,37 +26,77 @@
         
         //todo: is bind bad style?
         //preserve display value rather than always changing it to block on show/toggle
-        //animations
+        //queued animations
         function Modal(el) {
+        //el is either a dom node to modal-ify, or a className string.
+            
+            this.shown = false;
+            //this.display = "block";
         
+            //initialize dom
             if (typeof el === "object") {
                 this.dom = el;
+                if (this.dom.style.display == "none") this.shown = false;
             } else {
                 this.dom = document.createElement("div");
                 this.dom.className = (typeof el === "string")?el:"modal";
+                this.dom.style.display = "none";
                 document.body.appendChild(this.dom);
             }
         
             this.show = function(content) {
+                this.shown = true;
                 if (content) this.dom.innerHTML = content;
                 this.dom.style.display = "block";
+                if (this.inAnim) this.dom.style.animationName = this.inAnim;
             }.bind(this);
             
             this.toggle = function() {
-                if (this.dom.style.display === "none") {
-                    this.dom.style.display = "block";
+                if (this.shown) {
+                    this.hide();
+                } else {
+                    this.show();
+                }
+            }.bind(this);
+            
+            this.hide = function() {
+                this.shown = false;
+                if (this.outAnim) {
+                    this.dom.style.animationName = this.outAnim;
                 } else {
                     this.dom.style.display = "none";
                 }
             }.bind(this);
             
-            this.hide = function() {
-                this.dom.style.display = "none";
-            }.bind(this);
-            
             this.set = function(content) {
                 this.dom.innerHTML = content;
             }.bind(this);
+            
+            //animation stuff
+            this.setAnim = function(inAnim, outAnim) {
+                if (!this.inAnim) this.dom.addEventListener("animationend", function() {
+                    this.dom.style.animationName = "";
+                    console.log("anim end!");
+                    
+                    if (!this.shown) {
+                        this.dom.style.display = "none";
+                        if (this.inAnim === this.outAnim) {
+                            this.dom.style.animationDirection = "normal";
+                        }
+                    } else if (this.inAnim === this.outAnim) {
+                        this.dom.style.animationDirection = "reverse";
+                    }
+                }.bind(this));
+            
+                if (!inAnim) throw "setAnim requires at least an intro animation name string";
+                if (outAnim) {
+                    this.inAnim = inAnim;
+                    this.outAnim = outAnim;
+                } else {
+                    this.inAnim = inAnim;
+                    this.outAnim = inAnim;
+                }
+            }
             
         }
         
@@ -64,6 +104,7 @@
         
         window.onload = function() {
             myModal = new Modal();
+            myModal.setAnim("example");
             myModal.show("dogs all go to heaven");
             myModal.dom.onclick = myModal.hide;
         }
@@ -80,6 +121,14 @@
             box-shadow: 0px 3px 6px gray;
             
             padding: 20px;
+            
+            animation-duration: 1s;
+            animation-direction: alternate;
+        }
+        
+        @keyframes example {
+            from {opacity: 0; top: 20%;}
+            to {opacity: 1;}
         }
     </style>
  </head>
