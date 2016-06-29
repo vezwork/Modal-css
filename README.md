@@ -30,9 +30,9 @@ Super small (1.5kb), durable, and easy modal windows!
 check out the examples folder for simple useages of modal js.
 
 ### Further documentation
-in 'new Modal(el)' el can be
+in `new Modal(el)` el can be
 1. An html element you wish to add modal capabilities to.
 2. A className for use in css styling.
 3. Nothing which uses the default className "modal"
 
-in 'myModal.setAnim(animIn, animOut)' if only animIn is specified the exit animation will use the entrance animation reversed.
+in `myModal.setAnim(animIn, animOut)` if only animIn is specified the exit animation will use the entrance animation reversed.
