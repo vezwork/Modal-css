@@ -17,8 +17,7 @@ function Modal(el) {
         document.body.appendChild(this.dom);
     }
 
-    this.show = function(content) {
-        if (content) this.dom.innerHTML = content;
+    this.show = function() {
         this.dom.style.display = "block";
         
         if (this.inAnim) { //if animations are used
@@ -67,8 +66,12 @@ function Modal(el) {
         return this;
     }.bind(this);
     
-    this.set = function(content) {
-        this.dom.innerHTML = content;
+    this.set = function(content, selector) {
+        if (selector) {
+            this.dom.querySelector(selector).innerHTML = content;
+        } else {
+            this.dom.innerHTML = content;
+        }
         
         return this;
     }.bind(this);
