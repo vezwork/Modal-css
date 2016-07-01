@@ -37,4 +37,4 @@ in `new Modal(el)` el can be
 
 in `myModal.setAnim(animIn, animOut)` if only animIn is specified the exit animation will use the entrance animation reversed.
 
-'myModal.set' takes one required argument: the content to insert, and one optional requirement: a css selector which selects a child DOM node of the modal to insert the content into.
+`myModal.set` takes one required argument: the content to insert, and one optional requirement: a css selector which selects a child DOM node of the modal to insert the content into.
