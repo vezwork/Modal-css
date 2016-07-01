@@ -12,7 +12,7 @@ function Modal(el) {
         if (this.dom.style.display == "none") this.shown = false;
     } else {
         this.dom = document.createElement("div");
-        this.dom.className = (typeof el === "string")?el:"modal";
+        this.dom.id = (typeof el === "string")?el:"modal";
         this.dom.style.display = "none";
         document.body.appendChild(this.dom);
     }
