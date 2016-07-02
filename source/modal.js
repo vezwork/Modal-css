@@ -16,98 +16,98 @@ function Modal(el) {
         this.dom.style.display = "none";
         document.body.appendChild(this.dom);
     }
+}
 
-    this.show = function() {
-        this.dom.style.display = "block";
-        
-        if (this.inAnim) { //if animations are used
-            if (this.animating==0) { //not animating currently
-                if (!this.shown) {
-                    this.dom.style.animationName = this.inAnim;
-                    this.animating = 1;
-                    this.shown = true;                 
-                }
-            } else {
-                this.queued = (this.animating==1)?false:true;
-            }
-        } else {
-            this.shown = true;
-        }
-        
-        return this;
-    }.bind(this);
+Modal.prototype.show = function() {
+    this.dom.style.display = "block";
     
-    this.toggle = function() {
-        if (this.shown) {
-            this.hide();
-        } else {
-            this.show();
-        }
-        
-        return this;
-    }.bind(this);
-    
-    this.hide = function() {
-        if (this.outAnim) { //if animations are used
-            if (this.animating==0) { //not animating currently
-                if (this.shown) {
-                    this.dom.style.animationName = this.outAnim;
-                    this.animating = 2;
-                    this.shown = false;
-                }
-            } else {
-                this.queued = (this.animating==2)?false:true;
-            }
-        } else {
-            this.dom.style.display = "none";
-            this.shown = false;
-        }
-        
-        return this;
-    }.bind(this);
-    
-    this.set = function(content, selector) {
-        if (selector) {
-            this.dom.querySelector(selector).innerHTML = content;
-        } else {
-            this.dom.innerHTML = content;
-        }
-        
-        return this;
-    }.bind(this);
-    
-    //animation initialization
-    this.setAnim = function(inAnim, outAnim) {
-    
-        if (!this.inAnim) this.dom.addEventListener("animationend", function() {
-            this.dom.style.animationName = "";
-            this.animating = 0;
-            
+    if (this.inAnim) { //if animations are used
+        if (this.animating==0) { //not animating currently
             if (!this.shown) {
-                this.dom.style.display = "none";
-                if (this.inAnim === this.outAnim) {
-                    this.dom.style.animationDirection = "normal";
-                }
-            } else if (this.inAnim === this.outAnim) {
-                this.dom.style.animationDirection = "reverse";
+                this.dom.style.animationName = this.inAnim;
+                this.animating = 1;
+                this.shown = true;                 
             }
-            
+        } else {
+            this.queued = (this.animating==1)?false:true;
+        }
+    } else {
+        this.shown = true;
+    }
+    
+    return this;
+}
+
+Modal.prototype.toggle = function() {
+    if (this.shown) {
+        this.hide();
+    } else {
+        this.show();
+    }
+    
+    return this;
+}
+
+Modal.prototype.hide = function() {
+    if (this.outAnim) { //if animations are used
+        if (this.animating==0) { //not animating currently
+            if (this.shown) {
+                this.dom.style.animationName = this.outAnim;
+                this.animating = 2;
+                this.shown = false;
+            }
+        } else {
+            this.queued = (this.animating==2)?false:true;
+        }
+    } else {
+        this.dom.style.display = "none";
+        this.shown = false;
+    }
+    
+    return this;
+}
+
+Modal.prototype.set = function(content, selector) {
+    if (selector) {
+        this.dom.querySelector(selector).innerHTML = content;
+    } else {
+        this.dom.innerHTML = content;
+    }
+    
+    return this;
+}
+
+Modal.prototype.setAnim = function(inAnim, outAnim) {
+    
+    if (!this.inAnim) this.dom.addEventListener("animationend", function() {
+        this.dom.style.animationName = "";
+        this.animating = 0;
+        
+        if (!this.shown) {
+            this.dom.style.display = "none";
+            if (this.inAnim === this.outAnim) {
+                this.dom.style.animationDirection = "normal";
+            }
+        } else if (this.inAnim === this.outAnim) {
+            this.dom.style.animationDirection = "reverse";
+        }
+        
+        setTimeout(function() {
             if (this.queued) {
                 this.queued = false;
                 this.toggle();
             }
-        }.bind(this));
-    
-        if (!inAnim) throw "setAnim requires at least an intro animation name string";
-        if (outAnim) {
-            this.inAnim = inAnim;
-            this.outAnim = outAnim;
-        } else {
-            this.inAnim = inAnim;
-            this.outAnim = inAnim;
-        }
-        
-        return this;
+        }.bind(this), 0);
+    }.bind(this));
+
+    if (!inAnim) throw "setAnim requires at least an intro animation name string";
+    if (outAnim) {
+        this.inAnim = inAnim;
+        this.outAnim = outAnim;
+    } else {
+        this.inAnim = inAnim;
+        this.outAnim = inAnim;
     }
     
+    return this;
 }
