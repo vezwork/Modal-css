@@ -31,12 +31,13 @@ check out the examples folder for simple useages of modal js.
 
 ### Further documentation
 in `new Modal(el)` el can be
+
 1. An html element you wish to add modal capabilities to.
 2. A id for use in css styling.
 3. Nothing which uses the default id "modal"
 
 in `myModal.setAnim(animIn, animOut)` if only animIn is specified the exit animation will use the entrance animation reversed.
 
-`myModal.set` takes one required argument: the content to insert, and one optional requirement: a css selector which selects a child DOM node of the modal to insert the content into.
+`myModal.set(content, selector)` takes one required argument: the content to insert, and one optional requirement: a css selector which selects a child DOM node of the modal to insert the content into.
 
 `myModal.dom` exposes the actual in-document DOM element of the modal.
