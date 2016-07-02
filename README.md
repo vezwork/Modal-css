@@ -39,4 +39,4 @@ in `myModal.setAnim(animIn, animOut)` if only animIn is specified the exit anima
 
 `myModal.set` takes one required argument: the content to insert, and one optional requirement: a css selector which selects a child DOM node of the modal to insert the content into.
 
-'myModal.dom' exposes the actual in-document DOM element of the modal,
+`myModal.dom` exposes the actual in-document DOM element of the modal.
