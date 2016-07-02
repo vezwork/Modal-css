@@ -12,7 +12,7 @@
         
         window.onload = function() {
             myModal = new Modal("modal").setAnim("example", "example2").show().set("dogs all go to heaven");
-            myModal.dom.onclick = myModal.hide;
+            myModal.dom.onclick = myModal.hide.bind(myModal);
         }
     </script>
     <style>
