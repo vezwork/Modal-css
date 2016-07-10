@@ -67,11 +67,11 @@ Modal.prototype.hide = function() {
     return this;
 }
 
-Modal.prototype.set = function(content, selector) {
+Modal.prototype.set = function(content, selector, property) {
     if (selector) {
-        this.dom.querySelector(selector).innerHTML = content;
+        this.dom.querySelector(selector)[property || 'innerHTML'] = content;
     } else {
-        this.dom.innerHTML = content;
+        this.dom[property || 'innerHTML'] = content;
     }
     
     return this;
