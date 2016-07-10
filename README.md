@@ -1,5 +1,5 @@
-# Modal-js
-Super small (1.5kb), durable, and easy modal windows!
+# Modal-css
+Super small (1.5kb), customizable, and easy modal windows!
 
 ### Beautiful modal windows in 3 easy steps:
 
