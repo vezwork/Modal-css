@@ -1,5 +1,5 @@
 //preserve display value rather than always changing it to block on show/toggle?
-function Modal(el) {
+export function Modal(el) {
 //el is either a dom node to modal-ify, or a className string.
     
     this.shown = false;
@@ -112,4 +112,4 @@ Modal.prototype.setAnim = function(inAnim, outAnim) {
     return this;
 }
 
-export { Modal };
+exports = Modal;

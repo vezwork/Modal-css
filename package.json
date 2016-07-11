@@ -4,7 +4,7 @@
   "description": "Super small, customizable, and easy modal windows using css animations",
   "main": "minified/modal.min.js",
   "scripts": {
-    "build": "babel src -d lib && uglifyjs lib/modal.js -o min/modal.min.js"
+    "build": "babel src -d lib && uglifyjs lib/Modal.js -o min/Modal.min.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/vezwork/Modal-css#readme",
   "devDependencies": {
     "babel-cli": "^6.10.1",
+    "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
     "babel-preset-es2015": "^6.9.0",
     "uglify-js": "^2.7.0"
   }

@@ -3,8 +3,7 @@
 
 ### Beautiful modal windows in 3 easy steps:
 
-1. Include the minified javascript:
-  `<script src="pathto/modal.min.js"></script>`
+1. Include the minified javascript, modal-css implements [UMD](https://github.com/umdjs/umd)
   
 2. Create a new modal window:
   ```
