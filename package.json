@@ -1,6 +1,6 @@
 {
   "name": "modal-css",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Super small, customizable, and easy modal windows using css animations",
   "main": "min/modal.min.js",
   "scripts": {
