@@ -3,7 +3,8 @@
 
 ### Beautiful modal windows in 3 easy steps:
 
-1. Include the minified javascript, using a package manager (modal-css is [UMD](https://github.com/umdjs/umd)) or just by using `<script src="pathto/Modal.min.js"></script>`, the Modal constructor is represented as Modal.Modal.
+1. `npm install modal-css` 
+Include the minified javascript, using a package manager (modal-css is [UMD](https://github.com/umdjs/umd)) or just by using `<script src="pathto/Modal.min.js"></script>`, the Modal constructor is represented as Modal.Modal.
   
 2. Create a new modal window:
   ```
