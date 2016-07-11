@@ -2,7 +2,7 @@
   "name": "modal-css",
   "version": "1.1.0",
   "description": "Super small, customizable, and easy modal windows using css animations",
-  "main": "minified/modal.min.js",
+  "main": "min/modal.min.js",
   "scripts": {
     "build": "babel src -d lib && uglifyjs lib/Modal.js -o min/Modal.min.js"
   },
