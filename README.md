@@ -3,7 +3,7 @@
 
 ### Beautiful modal windows in 3 easy steps:
 
-1. Include the minified javascript, modal-css implements [UMD](https://github.com/umdjs/umd)
+1. Include the minified javascript, using a package manager (modal-css is [UMD](https://github.com/umdjs/umd)) or just by using `<script src="pathto/Modal.min.js"></script>`, the Modal constructor is represented as Modal.Modal.
   
 2. Create a new modal window:
   ```
@@ -15,7 +15,7 @@
   ```
   or
   `myModal = new Modal().setAnim("cssAnimationIn", "cssAnimationOut").set("<b>hey I'm a modal!</b>");`
-  And make sure you specify an `animation-duration' and some style for your modal in css.
+  And make sure you specify an `animation-duration` and some style for your modal in css.
   
 3. Use `myModal.show();`, `myModal.hide();`, or `myModal.toggle();` to control your modal.
   for example:
