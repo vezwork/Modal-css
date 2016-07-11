@@ -111,3 +111,5 @@ Modal.prototype.setAnim = function(inAnim, outAnim) {
     
     return this;
 }
+
+export { Modal };
