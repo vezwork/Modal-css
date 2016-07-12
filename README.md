@@ -3,18 +3,18 @@
 
 ### Beautiful modal windows in 3 easy steps:
 
-1. `npm install modal-css` Then import Modal.Modal using a package manager or simply using `<script src="pathto/Modal.min.js"></script>` 
+1. `npm install modal-css` Then import Modal.Modal using your favorite package manager or simply using `<script src="pathto/Modal.min.js"></script>` 
   
 2. Create a new modal window:
   ```
-  myModal = new Modal(); // creates a modal in dom with the id "modal".
+  myModal = new Modal.Modal(); // creates a modal in dom with the id "modal".
   
   myModal.setAnim("cssAnimationIn", "cssAnimationOut"); // specify entry and exit css animation names.
   
   myModal.set("<b>hey I'm a modal!</b>"); // Set the content of the modal window.
   ```
   or
-  `myModal = new Modal().setAnim("cssAnimationIn", "cssAnimationOut").set("<b>hey I'm a modal!</b>");`
+  `myModal = new Modal.Modal().setAnim("cssAnimationIn", "cssAnimationOut").set("<b>hey I'm a modal!</b>");`
   And make sure you specify an `animation-duration` and some style for your modal in css.
   
 3. Use `myModal.show();`, `myModal.hide();`, or `myModal.toggle();` to control your modal.
